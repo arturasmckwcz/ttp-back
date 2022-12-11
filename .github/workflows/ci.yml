@@ -15,16 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - with:
-          node-version: 16
-          cache: yarn
-      - run: yarn test
+      - run: |
+          cd ttp-back/ttp-back
+          yarn lint
 
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - with:
-          node-version: 16
-          cache: yarn
-      - run: yarn test
+      - run: |
+          cd ttp-back/ttp-back
+          yarn test
