@@ -15,16 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - with:
-          node-version: 16
-          cache: yarn
-      - run: yarn test
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - with:
-          node-version: 16
-          cache: yarn
-      - run: yarn test
+      - uses: actions/setup-node@v2
+      - run: |
+          yarn install --frozen-lockfile
+      - run: |
+          yarn run lint
