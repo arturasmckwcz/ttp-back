@@ -1,12 +1,11 @@
 import sinon, { SinonSandbox } from 'sinon';
-import * as database from '../db';
+import { Answer, Question } from '../db';
+import * as utils from '../db/utils';
 import { getQuestionsWithAnswers } from './helpers';
 
-const questions: database.Question[] = [
-  { id: 1, question: 'Is this the question?' },
-];
+const questions: Question[] = [{ id: 1, question: 'Is this the question?' }];
 
-const answers: database.Answer[] = [
+const answers: Answer[] = [
   { id: 1, questionID: 1, answer: 'Yes' },
   { id: 2, questionID: 1, answer: 'No' },
 ];
@@ -23,8 +22,8 @@ describe('getQuestionsWithAnswers', () => {
 
   beforeAll(() => {
     sandbox = sinon.createSandbox();
-    sandbox.stub(database, 'getQuestions').resolves(questions);
-    sandbox.stub(database, 'getAnswersForQuestion').resolves(answers);
+    sandbox.stub(utils, 'getQuestions').resolves(questions);
+    sandbox.stub(utils, 'getAnswersForQuestion').resolves(answers);
   });
 
   afterAll(() => sandbox.restore());
