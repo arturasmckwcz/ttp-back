@@ -14,17 +14,13 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - with:
-          node-version: 16
-          cache: yarn
-      - run: yarn test
+      - run: yarn lint
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - with:
-          node-version: 16
-          cache: yarn
-      - run: yarn test
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - with:
+#           node-version: 16
+#           cache: yarn
+#       - run: yarn test
