@@ -1,4 +1,5 @@
-export default {
+// eslint-disable-next-line no-undef
+module.exports = {
   globals: {
     'ts-jest': {
       tsConfig: 'tsconfig.json',
