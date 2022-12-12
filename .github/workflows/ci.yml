@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
+  lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,3 +18,5 @@ jobs:
           yarn install --frozen-lockfile
       - run: |
           yarn lint
+      - run: |
+          yarn test
