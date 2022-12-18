@@ -10,10 +10,18 @@ const answers: Answer[] = [
   { id: 2, questionID: 1, answer: 'No' },
 ];
 
-const questionsWithAnswers: { question: string; answers: string[] }[] = [
+const questionsWithAnswers: {
+  id: number;
+  question: string;
+  answers: { id: number; answer: string }[];
+}[] = [
   {
+    id: 1,
     question: 'Is this the question?',
-    answers: ['Yes', 'No'],
+    answers: [
+      { id: 1, answer: 'Yes' },
+      { id: 2, answer: 'No' },
+    ],
   },
 ];
 
