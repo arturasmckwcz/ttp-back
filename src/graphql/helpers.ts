@@ -22,6 +22,6 @@ export const getVerdict = async (score: number): Promise<Verdict> => {
 
   return {
     score,
-    verdict: `You have scored ${score}\n${author} says "${content}"`,
+    verdict: `${author} says: "${content}"`,
   };
 };
