@@ -7,4 +7,5 @@ export type Answer = {
   id: number;
   questionID: number;
   answer: string;
+  points: number;
 };

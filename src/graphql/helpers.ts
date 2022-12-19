@@ -1,11 +1,9 @@
 import { getAnswersForQuestion, getQuestions } from '../db';
+import getQuote from '../verdict/getQuote';
+import { QuestionWithAnswers, Verdict } from './types';
 
 export const getQuestionsWithAnswers = async (): Promise<
-  {
-    id: number;
-    question: string;
-    answers: Array<{ id: number; answer: string }>;
-  }[]
+  QuestionWithAnswers[]
 > => {
   const questions = await getQuestions();
   return await Promise.all(
@@ -14,7 +12,16 @@ export const getQuestionsWithAnswers = async (): Promise<
       question: question.question,
       answers: (
         await getAnswersForQuestion(question.id)
-      ).map(({ id, answer }) => ({ id, answer })),
+      ).map(({ id, answer, points }) => ({ id, answer, points })),
     }))
   );
+};
+
+export const getVerdict = async (score: number): Promise<Verdict> => {
+  const { content, author } = await getQuote();
+
+  return {
+    score,
+    verdict: `You have scored ${score}\n${author} says "${content}"`,
+  };
 };

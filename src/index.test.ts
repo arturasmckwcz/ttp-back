@@ -1,36 +1,39 @@
 import { graphql } from 'graphql';
 import { makeExecutableSchema } from '@graphql-tools/schema';
+import sinon, { SinonSandbox } from 'sinon';
 
 import { typeDefs } from './graphql/schema';
 import { resolvers } from './graphql/resolvers';
+import * as helpers from './graphql/helpers';
 
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
 
-const source = `
-  {
-    questionsWithAnswers {
-      id
-      question
-      answers {
-        id
-        answer
-      }
-    }
-  }
-`;
-
 describe('Schema', () => {
   describe('questionsWithAnswers', () => {
     it('should return result of proper type', async () => {
-      const response = (await graphql({ schema, source })) as {
+      const QuestionsWithAnswersDocument = `
+        {
+          questionsWithAnswers {
+            id
+            question
+            answers {
+              id
+              answer
+            }
+          }
+        }
+      `;
+      const response = (await graphql({
+        schema,
+        source: QuestionsWithAnswersDocument,
+      })) as {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         data: { questionsWithAnswers: Record<string, any>[] };
       };
 
-      expect(Array.isArray(response?.data?.questionsWithAnswers)).toBeTruthy();
       expect(Object.keys(response?.data?.questionsWithAnswers[0])).toEqual([
         'id',
         'question',
@@ -42,6 +45,42 @@ describe('Schema', () => {
       expect(
         Array.isArray(response?.data?.questionsWithAnswers[0]?.answers)
       ).toBeTruthy();
+    });
+  });
+
+  describe('verdict', () => {
+    let sandbox: SinonSandbox;
+
+    beforeAll(() => {
+      sandbox = sinon.createSandbox();
+      sandbox
+        .stub(helpers, 'getVerdict')
+        .resolves({ score: 50, verdict: 'Blah-blah-blah' });
+    });
+
+    afterAll(() => sandbox.restore());
+
+    it('should return result of proper type', async () => {
+      const VerdictDocument = `
+        {
+          verdict (score: 50) {
+            score
+            verdict
+          }
+        }
+      `;
+      const response = (await graphql({
+        schema,
+        source: VerdictDocument,
+      })) as {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        data: { verdict: Record<string, unknown> };
+      };
+
+      expect(Object.keys(response?.data?.verdict)).toEqual([
+        'score',
+        'verdict',
+      ]);
     });
   });
 });

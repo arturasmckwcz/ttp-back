@@ -1,7 +1,12 @@
-import { getQuestionsWithAnswers } from './helpers';
+import { getQuestionsWithAnswers, getVerdict } from './helpers';
 
 export const resolvers = {
   Query: {
-    questionsWithAnswers: () => getQuestionsWithAnswers(),
+    questionsWithAnswers: async () => {
+      return await getQuestionsWithAnswers();
+    },
+    verdict: async (_: unknown, { score }: { score: number }) => {
+      return await getVerdict(score);
+    },
   },
 };
