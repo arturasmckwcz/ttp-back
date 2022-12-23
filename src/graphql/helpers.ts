@@ -1,4 +1,9 @@
-import { getAnswersForQuestion, getQuestions } from '../db';
+import {
+  getAnswersForQuestion,
+  getQuestions,
+  QuestionsAndAnswers,
+  setDatabase,
+} from '../db';
 import getQuote from '../verdict/getQuote';
 import { QuestionWithAnswers, Verdict } from './types';
 
@@ -24,4 +29,11 @@ export const getVerdict = async (score: number): Promise<Verdict> => {
     score,
     verdict: `${author} says: "${content}"`,
   };
+};
+
+export const setQuestionsAndAnswers = async (
+  questionsAndAnswers: QuestionsAndAnswers
+): Promise<boolean> => {
+  setDatabase(questionsAndAnswers);
+  return true;
 };
