@@ -5,7 +5,7 @@ import {
   setDatabase,
 } from '../db';
 import getQuote from '../verdict/getQuote';
-import { QuestionWithAnswers, Verdict } from './types';
+import { QuestionWithAnswers, Verdict } from './__generated__/resolvers-types';
 
 export const getQuestionsWithAnswers = async (): Promise<
   QuestionWithAnswers[]
@@ -22,7 +22,7 @@ export const getQuestionsWithAnswers = async (): Promise<
   );
 };
 
-export const getVerdict = async (score: number): Promise<Verdict> => {
+export const getVerdict = async (score = 0): Promise<Verdict> => {
   const { content, author } = await getQuote();
 
   return {

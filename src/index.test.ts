@@ -1,10 +1,14 @@
 import { graphql } from 'graphql';
+import { readFileSync } from 'fs';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import sinon, { SinonSandbox } from 'sinon';
 
-import { typeDefs } from './graphql/schema';
 import { resolvers } from './graphql/resolvers';
 import * as helpers from './graphql/helpers';
+
+const typeDefs = readFileSync('./src/graphql/schema.graphql', {
+  encoding: 'utf-8',
+});
 
 const schema = makeExecutableSchema({
   typeDefs,

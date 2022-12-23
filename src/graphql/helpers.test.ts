@@ -2,7 +2,7 @@ import sinon, { SinonSandbox } from 'sinon';
 import { Answer, Question } from '../db';
 import * as utils from '../db/utils';
 import { getQuestionsWithAnswers } from './helpers';
-import { QuestionWithAnswers } from './types';
+import { QuestionWithAnswers } from './__generated__/resolvers-types';
 
 const questions: Question[] = [{ id: 1, question: 'Is this the question?' }];
 
