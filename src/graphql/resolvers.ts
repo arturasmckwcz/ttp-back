@@ -4,22 +4,27 @@ import {
   getVerdict,
   setQuestionsAndAnswers,
 } from './helpers';
+import {
+  MutationSetQuestionsAndAnswersArgs,
+  QueryVerdictArgs,
+  QuestionWithAnswers,
+} from './__generated__/resolvers-types';
 
 export const resolvers = {
   Query: {
-    questionsWithAnswers: async () => {
+    questionsWithAnswers: async (): Promise<QuestionWithAnswers[]> => {
       return await getQuestionsWithAnswers();
     },
-    verdict: async (_: unknown, { score }: { score: number }) => {
-      return await getVerdict(score);
+    verdict: async (_: unknown, { score }: QueryVerdictArgs) => {
+      return await getVerdict(score as number);
     },
   },
   Mutation: {
     setQuestionsAndAnswers: async (
       _: unknown,
-      { questionsAndAnswers }: { questionsAndAnswers: QuestionsAndAnswers }
+      { questionsAndAnswers }: MutationSetQuestionsAndAnswersArgs
     ): Promise<boolean> => {
-      return setQuestionsAndAnswers(questionsAndAnswers);
+      return setQuestionsAndAnswers(questionsAndAnswers as QuestionsAndAnswers);
     },
   },
 };

@@ -12,6 +12,7 @@
     "graphql-tools": "^8.3.14"
   },
   "scripts": {
+    "gen": "graphql-codegen --config codegen.yml",
     "compile": "tsc",
     "compile:clear": "rm -fr ./dist && yarn compile",
     "compile:watch": "tsc --watch",
@@ -22,6 +23,9 @@
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts ."
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.16.1",
+    "@graphql-codegen/typescript": "^2.8.5",
+    "@graphql-codegen/typescript-resolvers": "^2.7.10",
     "@types/jest": "^29.2.4",
     "@types/node": "16",
     "@types/sinon": "^10.0.13",
