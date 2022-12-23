@@ -9,3 +9,8 @@ export type Answer = {
   answer: string;
   points: number;
 };
+
+export type QuestionsAndAnswers = {
+  questions: Question[];
+  answers: Answer[];
+};
