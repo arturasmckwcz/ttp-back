@@ -8,8 +8,9 @@ COPY tsconfig.json ./
 
 RUN yarn install --pure-lockfile
 
-COPY src ./src
+COPY dist ./dist
+COPY src/graphql/schema.graphql ./src/graphql/schema.graphql
 
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["yarn", "docker:run"]
