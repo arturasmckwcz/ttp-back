@@ -17,6 +17,8 @@
     "compile:clear": "rm -fr ./dist && yarn compile",
     "compile:watch": "tsc --watch",
     "start": "yarn compile:clear && PORT=3000 node ./dist/index.js",
+    "docker:run": "PORT=3000 node ./dist/index.js",
+    "docker:build": "yarn compile:clear && docker build -t arturasmckwcz/ttp-backend .",
     "dev": "PORT=3007 nodemon ./dist/index.js",
     "test": "jest --verbose",
     "test:watch": "jest --verbose --detectOpenHandles",
