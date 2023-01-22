@@ -13,9 +13,10 @@ const server = new ApolloServer({
   resolvers,
 });
 
+const port = (process.env.PORT as unknown as number) || 3000;
 (async () =>
   await startStandaloneServer(server, {
-    listen: { port: process.env.PORT as unknown as number },
+    listen: { port },
   }))();
 
-console.log(`Server's ready at port: ${process.env.PORT}`);
+console.log(`Server's ready at port: ${port}`);
