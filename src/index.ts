@@ -5,17 +5,18 @@ import { readFileSync } from 'fs';
 import { resolvers } from './graphql/resolvers';
 
 const typeDefs = readFileSync('./src/graphql/schema.graphql', {
-  encoding: 'utf-8',
+  encoding: 'utf-8'
 });
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers,
+  resolvers
 });
 
+const port = (process.env.PORT as unknown as number) || 3000;
 (async () =>
   await startStandaloneServer(server, {
-    listen: { port: process.env.PORT as unknown as number },
+    listen: { port }
   }))();
 
-console.log(`Server's ready at port: ${process.env.PORT}`);
+console.log(`Server's ready at port: ${port}`);
